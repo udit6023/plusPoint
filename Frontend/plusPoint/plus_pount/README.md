@@ -1,4 +1,4 @@
-# plus_pount
+# plus_point
 
 A new Flutter project.
 
