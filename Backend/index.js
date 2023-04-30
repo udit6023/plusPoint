@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const Customer_data = require("./schema/add_customer");
+const vendor_routes = require("./routes/vendorRoute");
 
 
 app.use(express.json());
@@ -33,6 +34,11 @@ mongoose.connect("mongodb://127.0.0.1:27017/plushpoint",{
             })
         }
     });
+
+    // vendor
+    app.use('/api',vendor_routes);
+
+
 })
 .catch((err) =>{
     console.error(err);
