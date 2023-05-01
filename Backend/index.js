@@ -35,7 +35,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/plushpoint",{
         }
     });
 
-    // vendor
+    // vendor api
     app.use('/api',vendor_routes);
 
 
