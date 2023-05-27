@@ -1,22 +1,38 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:introduction_screen/introduction_screen.dart';
+import 'package:plus_point/HomeScreen.dart';
 import 'package:plus_point/LoginScreen.dart';
 import 'package:plus_point/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+  
 
   // This widget is the root of your application.
-  @override
+  
+  
+  
+
+  class _MyAppState extends State<MyApp> {
+   
+    @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+    
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -27,9 +43,84 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home:HomeScreen(),
     );
   }
-}
+  
+  }
+  class Intro extends StatelessWidget{
+
+     List<PageViewModel> listPagesViewModel=[
+    PageViewModel(
+  title: "Get rewards From\n your local shops",
+  body: "",
+  
+  image: Padding(
+    padding: const EdgeInsets.only(top:0.0),
+
+    
+    child: SvgPicture.asset("assets/images/welcomeScreen1Logo.svg",height: 300,width: 400,),
+  ),
+  decoration:const PageDecoration(
+    titlePadding: EdgeInsets.only(top:80),
+   imageAlignment: Alignment.center,
+    pageColor: Colors.white,
+  ),
+),
+PageViewModel(
+  title: "Check and Monitor\n your Credit Score",
+  body: "",
+  
+  image: Padding(
+    padding: const EdgeInsets.only(top:0.0),
+
+    
+    child: SvgPicture.asset("assets/images/welcomeScreen2Logo.svg",height: 300,width: 400,),
+  ),
+  decoration:const PageDecoration(
+    titlePadding: EdgeInsets.only(top:80),
+   imageAlignment: Alignment.center,
+    pageColor: Colors.white,
+  ),
+),
+PageViewModel(
+  title: "Buy now or pay Later\n At any QR code",
+  body: "(coming soon)",
+  
+  image: Padding(
+    padding: const EdgeInsets.only(top:0.0),
+
+    
+    child: SvgPicture.asset("assets/images/welcomeScreen3Logo.svg",height: 300,width: 400,),
+  ),
+  decoration:const PageDecoration(
+    titlePadding: EdgeInsets.only(top:80),
+   imageAlignment: Alignment.center,
+    pageColor: Colors.white,
+  ),
+)
+  ];
+  @override
+  Widget build(BuildContext context) {
+   return IntroductionScreen(
+        globalBackgroundColor:CupertinoColors.white ,
+        pages: listPagesViewModel,
+  showSkipButton: true,
+  showNextButton: false,
+  skip: const Text("Skip",style: TextStyle(fontSize: 20)),
+  done: const Text("Done",style: TextStyle(fontSize: 20),),
+  onDone: () {
+    // On button pressed
+    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const LoginScreen(
+                                                
+                                              )),
+                                    );
+  },
+      );
+  }
+
+  }
